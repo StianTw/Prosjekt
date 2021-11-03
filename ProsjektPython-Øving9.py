@@ -22,12 +22,9 @@ class sporsmaal:
           resultat += svaralternativer + "\n"
       return resultat
   
-    def sjekksvar(self, bruker):
-        if bruker == self.riktigsvar:
-            return "Du valgte riktig svar"
-        else:
-            return "Du har valgt feil svar"
-
+    def sjekksvar(self, brukersvar):
+        return int(brukersvar) == self.riktigsvar
+            
     def korrekt_svar_tekst(self):
         return self.svar[self.riktigsvar]
     
@@ -60,16 +57,16 @@ if __name__ == "__main__":
         Spiller2svar = input("Velg et svaralternativ for spiller 2: ")
         print ("Korrekt svar: {}".format(spm.korrekt_svar_tekst()))  
         
-        Spiller1korrektsvar = "Korrekt" if int(Spiller1svar) == spm.riktigsvar else "Feil"
+        Spiller1korrektsvar = "Korrekt" if spm.sjekksvar(Spiller1svar) else "Feil"
         print ("Spiller 1: {}".format(Spiller1korrektsvar))
         
-        if Spiller1korrektsvar == "Korrekt":
+        if spm.sjekksvar(Spiller1svar):
             Spiller1score += 1
         
-        Spiller2korrektsvar = "Korrekt" if int(Spiller2svar) == spm.riktigsvar else "Feil"
+        Spiller2korrektsvar = "Korrekt" if spm.sjekksvar(Spiller2svar) else "Feil"
         print ("Spiller 2: {}".format(Spiller2korrektsvar))
         
-        if Spiller2korrektsvar == "Korrekt":
+        if spm.sjekksvar(Spiller2svar):
             Spiller2score += 1
             
     print("Total score:")
